@@ -501,18 +501,20 @@
 
         // --- API Placeholder ---
         // REPLACE THIS FUNCTION WITH YOUR REAL API CALL LATER
-        async function fetchAIResponse(message) {
+        async function fetchAIResponse(question, subject) {
   const response = await fetch("/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ message })
+    body: JSON.stringify({
+      message: `${subject}: ${question}`
+    })
   });
 
   const data = await response.json();
   return data.reply;
-                    }
+        }
       {
                     
                     resolve(`[Placeholder AI]: ${responses[subject]}\n\n(You asked: "${question}")`);
