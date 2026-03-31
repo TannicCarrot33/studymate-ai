@@ -501,17 +501,19 @@
 
         // --- API Placeholder ---
         // REPLACE THIS FUNCTION WITH YOUR REAL API CALL LATER
-        function fetchAIResponse(question, subject) {
-            return new Promise(resolve => {
-                // Simulate network delay (1.5 seconds)
-                setTimeout(() => {
-                    // Dummy responses based on subject
-                    const responses = {
-                        'Physics': "Based on the laws of physics, that's an interesting question! To calculate or explain this, we must look at the standard formulas and principles...",
-                        'Chemistry': "In chemistry, interactions like this depend on atomic structures, bonding, and thermodynamic properties. Here is a breakdown of the reaction...",
-                        'Math': "Let's break down the math step-by-step. If we isolate the variables and apply the relevant theorems, the solution is...",
-                        'Biology': "From a biological perspective, this involves complex cellular or ecological processes. Here is how living systems handle this..."
-                    };
+        async function fetchAIResponse(message) {
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await response.json();
+  return data.reply;
+                    }
+      {
                     
                     resolve(`[Placeholder AI]: ${responses[subject]}\n\n(You asked: "${question}")`);
                 }, 1500);
